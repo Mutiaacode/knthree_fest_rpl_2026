@@ -1,0 +1,805 @@
+/* ==================================
+    KNTHREE FEST · RPL Showcase
+    Welcome Page Stylesheet
+    ================================== */
+
+/* Base Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #050505;
+    color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* ---- Swiper Setup ---- */
+.swiper {
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
+}
+
+/* ---- Animated Grid Lines Background ---- */
+.bg-grid {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridMove 25s linear infinite;
+}
+
+@keyframes gridMove {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 60px 60px;
+    }
+}
+
+/* ---- Film Grain Canvas Overlay ---- */
+.grain-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* ---- Live Clock ---- */
+.live-clock {
+    display: none;
+    /* Sembunyikan di mobile */
+    pointer-events: none;
+}
+
+@media (min-width: 768px) {
+    .live-clock {
+        display: block;
+        position: fixed;
+        top: 1.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        font-family: 'Unbounded', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: rgba(249, 249, 249, 0.45);
+        letter-spacing: 0.15em;
+    }
+}
+
+/* ---- Ticker Berjalan ---- */
+.ticker-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 34px;
+    z-index: 100;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(5, 5, 5, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+}
+
+.ticker-track {
+    display: flex;
+    white-space: nowrap;
+    will-change: transform;
+    width: max-content;
+    animation: tickerScroll 70s linear infinite;
+}
+
+.ticker-item {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: rgba(249, 249, 249, 0.45);
+    text-transform: uppercase;
+    padding: 0 1.5rem;
+}
+
+.ticker-sep {
+    color: rgba(249, 249, 249, 0.2);
+    font-size: 0.55rem;
+    padding: 0 0.25rem;
+    font-family: 'Unbounded', sans-serif;
+}
+
+@keyframes tickerScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ---- Layout Utama untuk Slide ---- */
+.slide-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: relative;
+}
+
+/* ---- Latar Belakang Animasi (Floating Elements) ---- */
+.bg-elements {
+    display: none;
+}
+
+/* Tablet/Desktop breakpoint */
+@media (min-width: 768px) {
+    .slide-layout {
+        flex-direction: row;
+    }
+}
+
+/* ---- Bagian Kiri: Teks & Info ---- */
+.slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4.5rem 2.5rem 1rem 1.5rem;
+    position: relative;
+    z-index: 10;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 768px) {
+    .slide-content {
+        padding: 6rem 3% 6rem 8%;
+        max-width: 50%;
+        overflow-y: visible;
+    }
+}
+
+/* Animasi Text Popup */
+.slide-content>* {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1),
+        transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.swiper-slide-active .slide-content>*:nth-child(1) {
+    transition-delay: 200ms;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.swiper-slide-active .slide-content>*:nth-child(2) {
+    transition-delay: 200ms;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.swiper-slide-active .slide-content>*:nth-child(3) {
+    transition-delay: 400ms;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.swiper-slide-active .slide-content>*:nth-child(4) {
+    transition-delay: 600ms;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.swiper-slide-active .slide-content>*:nth-child(5) {
+    transition-delay: 800ms;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Progress bar container di slide-layout - full width */
+.slide-layout>.progress-bar-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+}
+
+.project-author {
+    letter-spacing: 0.15rem;
+    font-size: 0.7rem;
+    color: #737373;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-family: 'Unbounded', sans-serif;
+}
+
+.project-author::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background-color: #525252;
+    flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+    .project-author {
+        font-size: 0.75rem;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .project-author::before {
+        width: 40px;
+    }
+}
+
+.project-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 8vw, 5.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    word-break: break-word;
+}
+
+@media (min-width: 768px) {
+    .project-title {
+        font-size: clamp(3rem, 5vw, 6rem);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        margin-bottom: 2rem;
+    }
+}
+
+.project-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #a3a3a3;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .project-desc {
+        font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+        line-height: 1.8;
+        max-width: 90%;
+        margin-bottom: 2.5rem;
+        -webkit-line-clamp: unset;
+        line-clamp: unset;
+    }
+}
+
+/* ====================================
+    BAGIAN GAMBAR PROJECT - FULL TIDAK TERPOTONG
+    DENGAN ANIMASI MUNCUL SAAT SLIDER
+    ==================================== */
+.slide-image {
+    flex: none;
+    height: 40vh;
+    min-height: 250px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2.5rem 3rem 1.5rem;
+    overflow: visible;
+}
+
+@media (min-width: 768px) {
+    .slide-image {
+        flex: 1;
+        height: auto;
+        min-height: 100vh;
+        padding: 4rem 5rem 4rem 2rem;
+        margin-left: 0;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.image-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    /* Ubah dari #000000 jadi transparan */
+
+    /* Animasi muncul */
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1),
+        transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+/* Gambar muncul saat slide aktif */
+.swiper-slide-active .image-container {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+@media (min-width: 768px) {
+    .image-container {
+        width: 85%;
+        height: 80vh;
+        max-height: 700px;
+        border-radius: 20px;
+
+        /* Efek miring di desktop dengan animasi */
+        transform: scale(0.9) perspective(1000px) rotateY(-8deg) rotateX(2deg) translateX(50px);
+        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    .swiper-slide-active .image-container {
+        opacity: 1;
+        transform: scale(1) perspective(1000px) rotateY(-8deg) rotateX(2deg) translateX(0);
+    }
+
+    .image-container:hover {
+        transform: perspective(1000px) rotateY(-5deg) rotateX(1deg) scale(1.02);
+    }
+}
+
+/* GAMBAR - SELALU FULL TIDAK TERPOTONG */
+.image-container img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    /* Kunci: gambar selalu utuh */
+    object-position: center center;
+    display: block;
+    border-radius: inherit;
+}
+
+/* Untuk desktop, gambar tetap contain agar tidak kepotong */
+@media (min-width: 768px) {
+    .image-container img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        object-position: center center;
+    }
+}
+
+/* Efek bayangan dalam dihapus agar transparan total */
+.image-container::after {
+    display: none;
+}
+
+/* ====================================
+    PROGRESS BAR AUTOPLAY (UNTUK TAMPILAN MONITOR)
+    ==================================== */
+.progress-bar-container {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar {
+    height: 100%;
+    background: #f9f9f9;
+    width: 0%;
+    transform-origin: left;
+}
+
+/* Ketika slide aktif, jalankan animasi lebar dari 0 ke 100% selama 7 detik (Sesuai JS) */
+.swiper-slide-active .progress-bar {
+    animation: progressAnim 12s linear forwards;
+}
+
+@keyframes progressAnim {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+/* ---- Action Area (Button & QR) ---- */
+.action-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 20;
+}
+
+@media (min-width: 768px) {
+    .action-area {
+        gap: 2rem;
+        margin-top: 1.5rem;
+        flex-wrap: nowrap;
+    }
+}
+
+/* ---- Black/White Minimalist Button ---- */
+.btn-minimalist {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(249, 249, 249, 0.3);
+    border-radius: 999px;
+    color: #f9f9f9;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.7rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Unbounded', sans-serif;
+    background: transparent;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-minimalist:active {
+    background-color: #f9f9f9;
+    color: #050505;
+    transform: scale(0.98);
+}
+
+.btn-minimalist:active svg {
+    transform: translateX(4px);
+}
+
+@media (min-width: 768px) {
+    .btn-minimalist {
+        padding: 1rem 2.5rem;
+        font-size: 0.8rem;
+        gap: 1rem;
+    }
+
+    .btn-minimalist:hover {
+        color: #050505;
+        border-color: #f9f9f9;
+    }
+
+    .btn-minimalist::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: #f9f9f9;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        z-index: -1;
+    }
+
+    .btn-minimalist:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    .btn-minimalist:hover svg {
+        transform: translateX(4px);
+    }
+}
+
+.btn-minimalist svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 10;
+}
+
+.btn-minimalist span {
+    position: relative;
+    z-index: 10;
+}
+
+/* ---- QR Code ---- */
+.qr-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.8s ease 1s, transform 0.8s ease 1s;
+}
+
+.swiper-slide-active .qr-wrapper {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.qr-box {
+    width: 100px;
+    height: 100px;
+    background: #f9f9f9;
+    padding: 0.5rem;
+    border-radius: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.qr-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.qr-text {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: #737373;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+    .qr-wrapper {
+        gap: 1.25rem;
+    }
+
+    .qr-box {
+        width: 140px;
+        height: 140px;
+        padding: 0.75rem;
+    }
+
+    .qr-text {
+        font-size: 0.75rem;
+        line-height: 1.6;
+    }
+}
+
+/* ---- Header Brand ---- */
+.header-brand {
+    position: fixed;
+    top: 1.2rem;
+    left: 1.5rem;
+    z-index: 100;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #f9f9f9;
+    letter-spacing: -0.05em;
+    text-decoration: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 768px) {
+    .header-brand {
+        top: 2.5rem;
+        left: 3rem;
+        font-size: 1.5rem;
+    }
+}
+
+/* ---- Admin Link SEJAJAR (HORIZONTAL) di SEMUA PERANGKAT ---- */
+.admin-link {
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    z-index: 100;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.7rem;
+    color: #737373;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    writing-mode: horizontal-tb !important;
+    transform: none !important;
+    rotate: 0deg !important;
+}
+
+.admin-link:hover,
+.admin-link:active {
+    color: #a3a3a3;
+}
+
+@media (min-width: 768px) {
+    .admin-link {
+        bottom: 2.5rem;
+        right: 3rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.2em;
+        writing-mode: horizontal-tb !important;
+        transform: none !important;
+        rotate: 0deg !important;
+    }
+}
+
+/* Landscape mode - tetap horizontal */
+@media (max-height: 500px) and (orientation: landscape) {
+    .admin-link {
+        bottom: 0.8rem;
+        right: 0.8rem;
+        font-size: 0.65rem;
+        writing-mode: horizontal-tb !important;
+        transform: none !important;
+    }
+}
+
+/* ---- Pagination Vertical Minimalist ---- */
+.swiper-pagination {
+    right: 0.8rem !important;
+    left: auto !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    z-index: 50;
+}
+
+.swiper-pagination-bullet {
+    width: 2px;
+    height: 16px;
+    background: #404040;
+    border-radius: 0;
+    opacity: 1;
+    transition: all 0.4s ease;
+}
+
+.swiper-pagination-bullet-active {
+    height: 32px;
+    background: #f9f9f9;
+}
+
+@media (min-width: 768px) {
+    .swiper-pagination {
+        right: 2rem !important;
+        gap: 0.8rem;
+    }
+
+    .swiper-pagination-bullet {
+        height: 20px;
+    }
+
+    .swiper-pagination-bullet-active {
+        height: 45px;
+    }
+}
+
+/* ====================================
+    LANDSCAPE MODE (Mobile)
+    ==================================== */
+@media (max-height: 500px) and (orientation: landscape) {
+    .slide-layout {
+        flex-direction: row;
+    }
+
+    .slide-image {
+        height: 100vh;
+        width: 50%;
+        padding: 3rem 2rem 2rem 1rem;
+    }
+
+    .image-container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .image-container img {
+        object-fit: contain;
+    }
+
+    .slide-content {
+        padding: 3rem 1rem 1rem 3rem;
+        justify-content: center;
+        max-width: 50%;
+    }
+
+    .project-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+        margin-bottom: 0.8rem;
+        font-size: 0.85rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+
+    .qr-box {
+        width: 70px;
+        height: 70px;
+    }
+
+    .header-brand {
+        top: 0.8rem;
+        left: 1.5rem;
+        font-size: 1rem;
+    }
+
+    .admin-link {
+        bottom: 0.8rem;
+        right: 1.5rem;
+        font-size: 0.65rem;
+    }
+}
+
+/* ====================================
+    LAYERED SWEEP TRANSITION OVERLAY
+    ==================================== */
+.transition-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sweep {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(100%);
+    will-change: transform;
+}
+
+.sweep-1 {
+    background: #f9f9f9;
+    /* Putih/Terang */
+    z-index: 1;
+}
+
+
+
+
+
+.sweep-2 {
+    background: #050505;
+    /* Hitam/Gelap */
+    z-index: 2;
+}
