@@ -16,7 +16,7 @@
     <!-- Welcome Page CSS (External) -->
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
 
-    <!-- Tailwind CSS (hanya untuk utility class seperti text-gray-600 di blade) -->
+    <!-- Tailwind CSS  -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -52,6 +52,7 @@
         <div class="bg-shape shape-1"></div>
         <div class="bg-shape shape-2"></div>
         <div class="bg-shape shape-3"></div>
+        <div class="bg-shape shape-4"></div>
     </div>
 
     <!-- Grid Lines Background -->
@@ -145,13 +146,6 @@
 
                             <!-- Actions -->
                             <div class="action-area">
-                                <a href="{{ $project->link }}" target="_blank" class="btn-minimalist">
-                                    <span>See Live</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </a>
-
                                 @if($project->qr_path)
                                 <div class="qr-wrapper">
                                     <div class="qr-box">
@@ -188,7 +182,6 @@
 
     <!-- GSAP (untuk slat transition) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -345,7 +338,6 @@
         }
         updateClock();
         setInterval(updateClock, 1000);
-
 
     </script>
 </body>
