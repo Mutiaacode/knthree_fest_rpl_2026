@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <!-- Google Fonts: Unbounded & Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Unbounded:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Unbounded:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -41,6 +44,7 @@
         }
     </script>
 </head>
+
 <body>
 
     <!-- Navigasi -->
@@ -104,74 +108,72 @@
         <div class="sweep sweep-2"></div>
     </div>
 
-    @if($projects->isEmpty())
+    @if ($projects->isEmpty())
         <div class="h-screen flex flex-col items-center justify-center text-center px-4">
             <h1 class="font-unbounded font-bold text-4xl mb-4">Tidak Ada Project</h1>
-            <p class="text-gray-500 mb-8 max-w-md">Login Untuk Menambahkan Project</p>
-            <a href="{{ route('login') }}" class="btn-minimalist">Login</a>
+            <p class="text-gray-500 mb-8 max-w-md">Belum ada project yang ditampilkan. Jadilah yang pertama!</p>
+            <a href="{{ route('submit.form') }}" class="btn-minimalist">Upload Project</a>
         </div>
     @else
         <!-- Swiper Container -->
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
 
-                @foreach($projects as $project)
-                <div class="swiper-slide">
-                    <div class="slide-layout">
-                        <!-- Progress Bar Autoplay (Full Width, Monitor Mode) -->
-                        <div class="progress-bar-container">
-                            <div class="progress-bar"></div>
-                        </div>
-
-                        <!-- Kiri: Info Proyek -->
-                        <div class="slide-content">
-                            <!-- Author -->
-                            <div class="project-author">
-                                <span>{{ $project->pembuat }}</span>
-                                @if($project->kelas)
-                                    <span style="opacity: 0.5; margin: 0 8px;">•</span>
-                                    <span>{{ $project->kelas }}</span>
-                                @endif
+                @foreach ($projects as $project)
+                    <div class="swiper-slide">
+                        <div class="slide-layout">
+                            <!-- Progress Bar Autoplay (Full Width, Monitor Mode) -->
+                            <div class="progress-bar-container">
+                                <div class="progress-bar"></div>
                             </div>
 
-                            <!-- Title -->
-                            <h1 class="project-title">
-                                {{ $project->judul }}
-                            </h1>
-
-                            <!-- Description -->
-                            <p class="project-desc">
-                                {{ $project->deskripsi }}
-                            </p>
-
-                            <!-- Actions -->
-                            <div class="action-area">
-                                @if($project->qr_path)
-                                <div class="qr-wrapper">
-                                    <div class="qr-box">
-                                        <img src="{{ asset('storage/' . $project->qr_path) }}"
-                                             alt="QR Code - {{ $project->judul }}"
-                                             loading="lazy">
-                                    </div>
-                                    <div class="qr-text">
-                                        Scan for<br>Mobile<br>View
-                                    </div>
+                            <!-- Kiri: Info Proyek -->
+                            <div class="slide-content">
+                                <!-- Author -->
+                                <div class="project-author">
+                                    <span>{{ $project->pembuat }}</span>
+                                    @if ($project->kelas)
+                                        <span style="opacity: 0.5; margin: 0 8px;">•</span>
+                                        <span>{{ $project->kelas }}</span>
+                                    @endif
                                 </div>
-                                @endif
-                            </div>
-                        </div>
 
-                        <!-- Kanan: Gambar Project -->
-                        <div class="slide-image">
-                            <div class="image-container">
-                                <img src="{{ asset('storage/' . $project->image) }}"
-                                     alt="{{ $project->judul }}"
-                                     loading="lazy">
-                            </div>
-                        </div>
+                                <!-- Title -->
+                                <h1 class="project-title">
+                                    {{ $project->judul }}
+                                </h1>
 
+                                <!-- Description -->
+                                <p class="project-desc">
+                                    {{ $project->deskripsi }}
+                                </p>
+
+                                <!-- Actions -->
+                                <div class="action-area">
+                                    @if ($project->qr_path)
+                                        <div class="qr-wrapper">
+                                            <div class="qr-box">
+                                                <img src="{{ asset('storage/' . $project->qr_path) }}"
+                                                    alt="QR Code - {{ $project->judul }}" loading="lazy">
+                                            </div>
+                                            <div class="qr-text">
+                                                Scan for<br>Mobile<br>View
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <!-- Kanan: Gambar Project -->
+                            <div class="slide-image">
+                                <div class="image-container">
+                                    <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->judul }}"
+                                        loading="lazy">
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
                 @endforeach
 
             </div>
@@ -186,15 +188,19 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        let isSliding = false;   
+        let isSliding = false;
 
         function slideTransition(callback) {
             if (isSliding) return;
             isSliding = true;
 
             const tl = gsap.timeline({
-                defaults: { ease: 'power3.inOut' },
-                onComplete: () => { isSliding = false; }
+                defaults: {
+                    ease: 'power3.inOut'
+                },
+                onComplete: () => {
+                    isSliding = false;
+                }
             });
 
             tl
@@ -204,15 +210,21 @@
                     duration: 0.7
                 })
                 // SAAT layar putih, ubah slide diam-diam di baliknya
-                .add(() => { if (typeof callback === 'function') callback(); })
-                .add(() => { animateActiveImage(); })
+                .add(() => {
+                    if (typeof callback === 'function') callback();
+                })
+                .add(() => {
+                    animateActiveImage();
+                })
                 // Lanjut sapu ke atas tanpa henti
                 .to('.sweep-1', {
                     y: '-100%',
                     duration: 0.7
                 })
                 // Reset tirai ke bawah (sembunyi)
-                .set('.sweep-1', { y: '100%' });
+                .set('.sweep-1', {
+                    y: '100%'
+                });
         }
 
         // ============================================================
@@ -221,20 +233,25 @@
         var swiper = new Swiper('.mySwiper', {
             direction: 'vertical',
             loop: true,
-            speed: 0,             // instant snap; visual handled by GSAP
+            speed: 0, // instant snap; visual handled by GSAP
             allowTouchMove: false, // gesture dihandle manual di bawah
             pagination: {
                 el: '.swiper-pagination',
-                clickable: false,  // klik pagination via custom handler
+                clickable: false, // klik pagination via custom handler
             },
-            keyboard: { enabled: false },  // custom keyboard handler
-            mousewheel: { enabled: false }, // custom wheel handler
+            keyboard: {
+                enabled: false
+            }, // custom keyboard handler
+            mousewheel: {
+                enabled: false
+            }, // custom wheel handler
         });
 
         // ---- Helper next / prev dengan wipe ----
         function goNext() {
             slideTransition(() => swiper.slideNext(0));
         }
+
         function goPrev() {
             slideTransition(() => swiper.slidePrev(0));
         }
@@ -247,25 +264,31 @@
                 if (e.deltaY > 0) goNext();
                 else goPrev();
             }, 30); // debounce ringan
-        }, { passive: true });
+        }, {
+            passive: true
+        });
 
         // ---- Keyboard Arrow / PageUp / PageDown ----
         window.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowDown' || e.key === 'PageDown') goNext();
-            if (e.key === 'ArrowUp'   || e.key === 'PageUp')   goPrev();
+            if (e.key === 'ArrowUp' || e.key === 'PageUp') goPrev();
         });
 
         // ---- Touch Swipe (Mobile) ----
         let touchStartY = 0;
         window.addEventListener('touchstart', (e) => {
             touchStartY = e.touches[0].clientY;
-        }, { passive: true });
+        }, {
+            passive: true
+        });
         window.addEventListener('touchend', (e) => {
             const diff = touchStartY - e.changedTouches[0].clientY;
             if (Math.abs(diff) > 50) {
                 diff > 0 ? goNext() : goPrev();
             }
-        }, { passive: true });
+        }, {
+            passive: true
+        });
 
         // ---- Pagination bullets (custom click) ----
         document.querySelector('.swiper-pagination')?.addEventListener('click', (e) => {
@@ -285,9 +308,13 @@
             clearInterval(autoplayTimer);
             autoplayTimer = setInterval(goNext, 12000);
         }
-        window.addEventListener('wheel', resetAutoplay, { passive: true });
+        window.addEventListener('wheel', resetAutoplay, {
+            passive: true
+        });
         window.addEventListener('keydown', resetAutoplay);
-        window.addEventListener('touchend', resetAutoplay, { passive: true });
+        window.addEventListener('touchend', resetAutoplay, {
+            passive: true
+        });
 
         // ---- Animasi gambar untuk slide PERTAMA saat halaman dimuat ----
         window.addEventListener('DOMContentLoaded', () => {
@@ -297,24 +324,26 @@
 
         // ---- Film Grain Canvas (Optimized: Low Res + Throttled ~20fps) ----
         const grainCanvas = document.getElementById('grainCanvas');
-        const grainCtx    = grainCanvas.getContext('2d');
+        const grainCtx = grainCanvas.getContext('2d');
         const GRAIN_SCALE = 0.3; // Render di 30% resolusi, stretch via CSS
 
         function resizeGrain() {
-            grainCanvas.width  = Math.floor(window.innerWidth  * GRAIN_SCALE);
+            grainCanvas.width = Math.floor(window.innerWidth * GRAIN_SCALE);
             grainCanvas.height = Math.floor(window.innerHeight * GRAIN_SCALE);
         }
 
         let lastGrainFrame = 0;
+
         function renderGrain(timestamp) {
             // Throttle: hanya update setiap ~50ms (20fps)
             if (timestamp - lastGrainFrame > 50) {
                 lastGrainFrame = timestamp;
-                const w = grainCanvas.width, h = grainCanvas.height;
+                const w = grainCanvas.width,
+                    h = grainCanvas.height;
                 const imageData = grainCtx.createImageData(w, h);
                 for (let i = 0; i < imageData.data.length; i += 4) {
                     const v = Math.random() * 255;
-                    imageData.data[i]     = v;
+                    imageData.data[i] = v;
                     imageData.data[i + 1] = v;
                     imageData.data[i + 2] = v;
                     imageData.data[i + 3] = 10;
@@ -338,7 +367,7 @@
         }
         updateClock();
         setInterval(updateClock, 1000);
-
     </script>
 </body>
+
 </html>
