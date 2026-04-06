@@ -21,7 +21,7 @@
 <body class="bg-gray-100 h-screen flex justify-center items-center font-sans">
 
     <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">Login Admin</h2>
+        <h2 class="text-2xl font-bold text-center text-dark-600 mb-6">Login Admin</h2>
         
         @if ($errors->any())
             <div class="mb-4 bg-red-100 text-red-600 p-3 rounded text-sm">
@@ -49,7 +49,7 @@
             </div>
 
             <div class="flex items-center justify-between">
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <button type="submit" class="w-full bg-gray-600 hover:bg-dark-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                     Log In
                 </button>
             </div>
